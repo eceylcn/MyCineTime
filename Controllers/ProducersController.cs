@@ -1,12 +1,37 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyCineTime.Data;
 
 namespace MyCineTime.Controllers;
 
-public class Producers : Controller
+public class ProducersController : Controller
 {
-    // GET
-    public IActionResult Index()
+    private readonly ApplicationDbContext _context;
+    
+    public ProducersController(ApplicationDbContext context)
     {
-        return View();
+        _context = context;
+    }
+    
+    // GET
+    public async Task<IActionResult> Index()
+    {
+        var allProducers = await _context.Producers.ToListAsync();
+        return View(allProducers);
+    }
+
+    public IActionResult Edit()
+    {
+        throw new NotImplementedException();
+    }
+
+    public IActionResult Details()
+    {
+        throw new NotImplementedException();
+    }
+
+    public IActionResult Delete()
+    {
+        throw new NotImplementedException();
     }
 }
